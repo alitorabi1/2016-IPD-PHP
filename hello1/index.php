@@ -11,8 +11,9 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
-        echo "Hello World!";
+        $name = $_GET['name'];
+        $age = $_GET['age'];
+        echo "Hello $name!. You are $age years old.";
         ?>
     </body>
 </html>
