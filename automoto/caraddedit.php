@@ -58,7 +58,7 @@ if (!isset($_POST['makeModel'])) {
         // STATE3: Submission successful
         $sql = "INSERT INTO car VALUES (NULL, '" .
                 mysqli_escape_string($conn, $makeModel) . "', '" .
-                mysqli_escape_string($conn, $yop) . "')" .
+                mysqli_escape_string($conn, $yop) . "', '" .
                 mysqli_escape_string($conn, $plates) . "')";
         $result = mysqli_query($conn, $sql);
         if (!$result) {

@@ -1,8 +1,8 @@
 <?php
 
-$db_name = 'ipd8automoto';
-$db_user = 'ipd8automoto';
-$db_pass = 'S8Ycsp3GtYLyYj2d';
+$db_user = "ipd8-ali";
+$db_name = "ipd8-ali";
+$db_pass = "WTSXRUAfHzMj2aZB";
 
 $conn = mysqli_connect('localhost', $db_user, $db_pass, $db_name);
 

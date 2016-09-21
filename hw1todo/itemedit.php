@@ -21,7 +21,7 @@
 function getForm($desc = '', $dd = '', $isd = '') {
 
     $f = <<< ENDTAG
-<h3>Add or Edit Item</h3>
+<h3>Edit Item</h3>
 <form method="post" class="contact_form">
     Description: <textarea name="description" value="$desc"></textarea><br>
     Due date: <input type="text" name="dueDate" value="$dd"><br>
@@ -71,20 +71,33 @@ if (!isset($_POST['description'])) {
             echo "<li>\n" . htmlspecialchars($error) . "</li>";
         }
         echo "</ul>\n";
-        echo getForm($description, $dueDate, 0);
+//        echo getForm($description, $dueDate, 0);
     } else {
         // STATE3: Submission successful
-        $sql = "INSERT INTO hw1todo VALUES (NULL, '" .
-                mysqli_escape_string($conn, $description) . "', '" .
-                mysqli_escape_string($conn, $dueDate) . "', 0)";
-        $result = mysqli_query($conn, $sql);
-        if (!$result) {
-            echo "Error executing query [ $sql ] : " . mysqli_error($conn);
-        }
-        echo "Submission successful";
-        echo "<form action=\"index.php\" method=\"post\">";
-        echo "<input type=\"submit\" value=\" Save \">";
-        echo "</form>";
+                $sql = "SELECT * FROM hw1todo WHERE ID=$id";
+
+                $result = mysqli_query($conn, $sql);
+                if (!$result) {
+                    die("Error executing query [ $query ] : " . mysqli_error($conn));
+                }
+
+                $datarows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                foreach ($datarows as $row) {
+                    $desc = htmlentities($row['description']);
+                    $dueDate = htmlentities($row['dueDate']);
+                    echo getForm($desc, $dueDate, 0);
+                }
+        
+        
+//        $sql = "UPDATE hw1todo SET ID=NULL, description=$description, dueDate=$dueDate, isDone=0 WHERE ID=$id)";
+//        $result = mysqli_query($conn, $sql);
+//        if (!$result) {
+//            echo "Error executing query [ $sql ] : " . mysqli_error($conn);
+//        }
+//        echo "Update successful";
+//        echo "<form action=\"index.php\" method=\"post\">";
+//        echo "<input type=\"submit\" value=\" Save \">";
+//        echo "</form>";
     }
 }
 ?>

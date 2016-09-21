@@ -25,6 +25,7 @@
     <center>
         <div id="divData">
             <table id="tblData" border>
+            <tr><th>#</th><th>Description</th><th>Due date</th><th>Is done</th><th colspan="2">operations</th></tr>
                 <?php
                 require_once 'db.php';
 
@@ -32,17 +33,19 @@
 
                 $result = mysqli_query($conn, $sql);
                 if (!$result) {
-                    echo "Error executing query [ $sql ] : " . mysqli_error($conn);
+                    die("Error executing query [ $query ] : " . mysqli_error($conn));
                 }
 
                 $datarows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                echo "<tr><th>#</th><th>Description</th><th>Due date</th><th>Is done</th></tr>";
                 foreach ($datarows as $row) {
                     $ID = $row['ID'];
                     $desc = htmlentities($row['description']);
                     $dueDate = htmlentities($row['dueDate']);
                     $isDone = $row['isDone'];
-                    echo "<tr><td>$ID</td><td>$desc</td><td>$dueDate</td><td>$isDone</td>";
+                    echo "<tr><td>$ID</td><td>$desc</td><td>$dueDate</td><td>$isDone</td>\n";
+                    echo "<td><a href=\"itemdelete.php?id=$ID\">Delete</td>\n";
+                    echo "<td><a href=\"itemedit.php?id=$ID\">Edit</td>\n";
+                    echo "</tr>\n";
                 }
                 ?>
             </table>
