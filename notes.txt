@@ -1,0 +1,16 @@
+hongkiat
+symphony
+ruby
+Yii 2 (yes it is)
+
+
+------------------
+
+SQL
+
+. . . LIMIT COUNT
+LIMIT 10
+
+LIMIT SKIP COUNT
+LIMIT 10 20 = select 20 items from 11 th record
+
