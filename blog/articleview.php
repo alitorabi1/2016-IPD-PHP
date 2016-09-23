@@ -18,7 +18,7 @@ if (!isset($_SESSION['user'])) {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = sprintf("SELECT a.title as T, u.name as N, a.pubDate as PD, a.body as B FROM articles a, users u WHERE a.ID='%d'" .
+    $sql = sprintf("SELECT a.title as T, u.name as N, a.pubDate as PD, a.body as B, a.imagePath as I FROM articles a, users u WHERE a.ID='%d'" .
             "AND u.name=(SELECT name FROM users where ID=a.authorID)", mysqli_escape_string($conn, $id));
     $result = mysqli_query($conn, $sql);
     if (!$result) {
@@ -30,12 +30,14 @@ if (isset($_GET['id'])) {
         $author = htmlentities($row['N']);
         $pubDate = htmlentities($row['PD']);
         $body = htmlentities($row['B']);
+        $image = htmlentities($row['I']);
     }
     echo "<h2>View details of the article: $id </h2>";
     echo "Title: $title <br>";
     echo "Author name: $author <br>";
     echo "Date of creation: $pubDate<br>";
     echo "Body: $body <br><br>";
+    echo "Body: <img src='$image'> <br><br>";
     echo '<a href="index.php">Back to Home</a>';
 } else {
     echo "Error: Please select a valid student";

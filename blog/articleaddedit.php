@@ -14,6 +14,11 @@ function getForm($subj = '', $bdy = '') {
 
     $f = <<< JAMISSWEET
 <h3>Add or Edit Car</h3>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
 <form method="post">
     Subject: <input type="text" name="subject" value="$subj"><br>
     Body: <textarea name="body" value="$bdy"></textarea><br>
@@ -51,6 +56,11 @@ if (!isset($_POST['subject'])) {
     if (empty($body) || strlen($body) < 50) {
         array_push($errorList, "Body must be at least 4 characters long");
     }
+    if (empty($_GET['image'])) {
+        array_push($errorList, "Please upload an image for your article");
+    } else {
+        $file_name = $_GET['image'];
+    }
     //
     if ($errorList) {
         // STATE 3: submission failed - problems found
@@ -63,11 +73,12 @@ if (!isset($_POST['subject'])) {
         echo getForm($subject, $body);
     } else {
         // STATE 2: submission successful
-        $sql = sprintf("INSERT INTO articles VALUES (NULL, '%s', '%s', '%s', '%s')",
+        $sql = sprintf("INSERT INTO articles VALUES (NULL, '%s', '%s', '%s', '%s', '%s')",
                 mysqli_escape_string($conn, $_SESSION['user']['ID']),
                 date('Y-m-d H:i:s'),
                 mysqli_escape_string($conn, $subject),
-                mysqli_escape_string($conn, $body));
+                mysqli_escape_string($conn, $body),
+                mysqli_escape_string($conn, $file_name));
         $result = mysqli_query($conn, $sql);
         if (!$result) {
             die("Error executing query [ $sql ] : " . mysqli_error($conn));
