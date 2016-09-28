@@ -11,12 +11,28 @@ class ComposerStaticInit2686c091321f558a34c7a9e674c594be
         array (
             'Slim\\Views\\' => 11,
         ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Slim\\Views\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/views',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
     );
 

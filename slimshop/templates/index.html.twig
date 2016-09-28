@@ -1,0 +1,17 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h3>Please <a href="index.php/register">Register</a> or <a href="index.php/login">Login</a></h3>
+
+<table border='1'>
+{% for ad in adList %}
+    <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td><td><a href="/postad/{{ad.ID}}">Edit Ad</a></td></tr>
+{% else %}
+    <tr><td colspan='2'>No ads have been found</td><td><a href="/postad">Post Ad</a></td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

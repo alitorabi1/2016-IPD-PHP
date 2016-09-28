@@ -7,29 +7,49 @@ class __TwigTemplate_098824506adb0dc583a595e779f15ff673438eb382eb077734065d737f5
     {
         parent::__construct($env);
 
-        $this->parent = false;
-
+        // line 1
+        $this->parent = $this->loadTemplate("master.html.twig", "postad.html.twig", 1);
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'content' => array($this, 'block_content'),
         );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 2
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_title($context, array $blocks = array())
+    {
+        echo "Post Ads";
+    }
+
+    // line 5
+    public function block_content($context, array $blocks = array())
+    {
+        // line 6
         echo "
+
 <h1>Post Ad</h1>
 
 ";
-        // line 5
+        // line 10
         if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
-            // line 6
+            // line 11
             echo "    <ul>
         ";
-            // line 7
+            // line 12
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["errorList"]) ? $context["errorList"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 8
+                // line 13
                 echo "            <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "</li>
@@ -38,27 +58,29 @@ class __TwigTemplate_098824506adb0dc583a595e779f15ff673438eb382eb077734065d737f5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 10
+            // line 15
             echo "    </ul>
 ";
         }
-        // line 12
+        // line 17
         echo "
 <form method=\"post\">
     Post Ad: <textarea name=\"msg\">";
-        // line 14
+        // line 19
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "msg", array()), "html", null, true);
         echo "</textarea><br><br>
     Price: <input type=\"number\" name=\"price\" value=\"";
-        // line 15
+        // line 20
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "price", array()), "html", null, true);
         echo "\"><br><br>
     Contact email: <input type=\"text\" name=\"contactEmail\" value=\"";
-        // line 16
+        // line 21
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "contactEmail", array()), "html", null, true);
         echo "\"><br><br>
     <input type=\"submit\" value=\"Post Ad\">
-</form>";
+</form>
+    
+";
     }
 
     public function getTemplateName()
@@ -73,12 +95,17 @@ class __TwigTemplate_098824506adb0dc583a595e779f15ff673438eb382eb077734065d737f5
 
     public function getDebugInfo()
     {
-        return array (  58 => 16,  54 => 15,  50 => 14,  46 => 12,  42 => 10,  33 => 8,  29 => 7,  26 => 6,  24 => 5,  19 => 2,);
+        return array (  78 => 21,  74 => 20,  70 => 19,  66 => 17,  62 => 15,  53 => 13,  49 => 12,  46 => 11,  44 => 10,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
     {
-        return "{# empty Twig template #}
+        return "{% extends \"master.html.twig\" %}
+
+{% block title %}Post Ads{% endblock %}
+
+{% block content %}
+
 
 <h1>Post Ad</h1>
 
@@ -95,6 +122,9 @@ class __TwigTemplate_098824506adb0dc583a595e779f15ff673438eb382eb077734065d737f5
     Price: <input type=\"number\" name=\"price\" value=\"{{v.price}}\"><br><br>
     Contact email: <input type=\"text\" name=\"contactEmail\" value=\"{{v.contactEmail}}\"><br><br>
     <input type=\"submit\" value=\"Post Ad\">
-</form>";
+</form>
+    
+{% endblock %}
+";
     }
 }

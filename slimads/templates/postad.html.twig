@@ -1,4 +1,9 @@
-{# empty Twig template #}
+{% extends "master.html.twig" %}
+
+{% block title %}Post Ads{% endblock %}
+
+{% block content %}
+
 
 <h1>Post Ad</h1>
 
@@ -16,3 +21,5 @@
     Contact email: <input type="text" name="contactEmail" value="{{v.contactEmail}}"><br><br>
     <input type="submit" value="Post Ad">
 </form>
+    
+{% endblock %}

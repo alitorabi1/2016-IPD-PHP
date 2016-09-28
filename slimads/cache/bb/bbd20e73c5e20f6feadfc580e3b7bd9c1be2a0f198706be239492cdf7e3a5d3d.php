@@ -7,46 +7,69 @@ class __TwigTemplate_d2d5e3f51b723997dcf7f3e7c66db76fc51540911eda27c1e3553db0abe
     {
         parent::__construct($env);
 
-        $this->parent = false;
-
+        // line 1
+        $this->parent = $this->loadTemplate("master.html.twig", "index.html.twig", 1);
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'content' => array($this, 'block_content'),
         );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 2
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_title($context, array $blocks = array())
+    {
+        echo "All Ads";
+    }
+
+    // line 5
+    public function block_content($context, array $blocks = array())
+    {
+        // line 6
         echo "
 <h3><a href=\"index.php/postad\">Post Ad</a></h3>
 
 <table border='1'>
 ";
-        // line 6
+        // line 10
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["adList"]) ? $context["adList"] : null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["ad"]) {
-            // line 7
+            // line 11
             echo "    <tr><td> ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "msg", array()), "html", null, true);
             echo " </td><td> ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "price", array()), "html", null, true);
             echo " </td><td> ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "contactEmail", array()), "html", null, true);
-            echo " </td></tr>
+            echo " </td><td><a href=\"/postad/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "ID", array()), "html", null, true);
+            echo "\">Edit Ad</a></td></tr>
 ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 9
-            echo "    <tr><td colspan='2'>No ads have been found</td><td><a href=\"index.php/postad\">Post Ad</a></td></tr>
+            // line 13
+            echo "    <tr><td colspan='2'>No ads have been found</td><td><a href=\"/postad\">Post Ad</a></td></tr>
 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ad'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 11
-        echo "</table>";
+        // line 15
+        echo "</table>
+
+";
     }
 
     public function getTemplateName()
@@ -61,21 +84,28 @@ class __TwigTemplate_d2d5e3f51b723997dcf7f3e7c66db76fc51540911eda27c1e3553db0abe
 
     public function getDebugInfo()
     {
-        return array (  49 => 11,  42 => 9,  30 => 7,  25 => 6,  19 => 2,);
+        return array (  70 => 15,  63 => 13,  49 => 11,  44 => 10,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
     {
-        return "{# empty Twig template #}
+        return "{% extends \"master.html.twig\" %}
+
+{% block title %}All Ads{% endblock %}
+
+{% block content %}
 
 <h3><a href=\"index.php/postad\">Post Ad</a></h3>
 
 <table border='1'>
 {% for ad in adList %}
-    <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td></tr>
+    <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td><td><a href=\"/postad/{{ad.ID}}\">Edit Ad</a></td></tr>
 {% else %}
-    <tr><td colspan='2'>No ads have been found</td><td><a href=\"index.php/postad\">Post Ad</a></td></tr>
+    <tr><td colspan='2'>No ads have been found</td><td><a href=\"/postad\">Post Ad</a></td></tr>
 {% endfor %}
-</table>";
+</table>
+
+{% endblock %}
+";
     }
 }
