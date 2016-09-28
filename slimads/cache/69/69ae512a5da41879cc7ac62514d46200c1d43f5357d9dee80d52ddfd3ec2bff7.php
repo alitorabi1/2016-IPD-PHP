@@ -17,7 +17,7 @@ class __TwigTemplate_c23e53f62fdbf7a1e4be614662b755d5e30cd786c34a08237785e26f023
     {
         // line 2
         echo "
-<p><a href=\"/\">Go to home</a></p>
+<p><a href=\"http://localhost/ipd8/slimads/index.php\">Go to home</a></p>
 ";
     }
 
@@ -35,7 +35,7 @@ class __TwigTemplate_c23e53f62fdbf7a1e4be614662b755d5e30cd786c34a08237785e26f023
     {
         return "{# empty Twig template #}
 
-<p><a href=\"/\">Go to home</a></p>
+<p><a href=\"http://localhost/ipd8/slimads/index.php\">Go to home</a></p>
 ";
     }
 }

@@ -4,7 +4,8 @@ require_once 'vendor/autoload.php';
 
 DB::$dbName = 'slimads';
 DB::$user = 'slimads';
-DB::$password = "K7cuRhvudtpMxJP8";
+//DB::$password = "K7cuRhvudtpMxJP8";
+DB::$password = "FnsNbTteESvUXGFj";
 //DB::$host = '127.0.0.1'; // sometimes needed for MAX
 DB::$error_handler = 'sql_error_handler';
 DB::$nonsql_error_handler = 'nonsql_error_handler';

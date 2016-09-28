@@ -1,8 +1,11 @@
 {# empty Twig template #}
+
+<h3><a href="index.php/postad">Post Ad</a></h3>
+
 <table border='1'>
 {% for ad in adList %}
     <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td></tr>
 {% else %}
-    <tr><td colspan='2'>No ads have been found</td><td></td><a href="index.php/postad">Post Ad</a></tr>
+    <tr><td colspan='2'>No ads have been found</td><td><a href="index.php/postad">Post Ad</a></td></tr>
 {% endfor %}
 </table>
