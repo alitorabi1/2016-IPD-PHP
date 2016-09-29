@@ -11,10 +11,10 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
-
 DB::$dbName = 'slimshop';
 DB::$user = 'slimshop';
-DB::$password = "hdpuJCL668ADQbnM";
+DB::$password = "BJZSdfS92F4fB2en";
+//DB::$password = "hdpuJCL668ADQbnM";
 //DB::$password = "FnsNbTteESvUXGFj";
 //DB::$host = '127.0.0.1'; // sometimes needed for MAX
 DB::$error_handler = 'sql_error_handler';
@@ -51,9 +51,8 @@ $view->setTemplatesDirectory(dirname(__FILE__) . '/templates');
 \Slim\Route::setDefaultConditions(array('id' => '\d+'));
 
 $app->get('/', function() use ($app) {
-    echo "Welcome to slimstore Page";
-    $adList = DB::query('SELECT * FROM users');
-    $app->render('index.html.twig', array('adList' => $adList));
+    $userList = DB::query('SELECT * FROM users');
+    $app->render('index.html.twig', array('userList' => $userList));
 });
 
 $app->get('/register', function() use ($app){
@@ -62,7 +61,7 @@ $app->get('/register', function() use ($app){
 
 $app->post('/register', function() use ($app, $log){
 //    echo 'Not implemented yet.';
-    $name = $app->request->post('email');
+    $name = $app->request->post('name');
     $email = $app->request->post('email');
     $pass1 = $app->request->post('pass1');
     $pass2 = $app->request->post('pass2');
@@ -96,45 +95,46 @@ $app->post('/register', function() use ($app, $log){
 });
 
 $app->get('/login', function() use ($app){
-    $app->render('register.html.twig');
+    $app->render('login.html.twig');
 });
 
 $app->post('/login', function() use ($app, $log){
 //    echo 'Not implemented yet.';
     $email = $app->request->post('email');
-    $pass1 = $app->request->post('pass1');
+    $pass1 = $app->request->post('pass');
     $valueList = array('email' => $email, 'pass1' => $pass1);
     $errorList = array();
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE) {
-        array_push($errorList, "Email does not look like a valid email");
-        unset($valueList['email']);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE || $email === "") {
+        array_push($errorList, "Email is empty or does not look like a valid email");
+    }
+    if ($pass1 === "") {
+        array_push($errorList, "Password can not be empty");
     }
 
     if ($errorList) {
-        $app->render('register.html.twig', array('errorList' => $errorList, 'v' => $valueList));
+        $app->render('login.html.twig', array('errorList' => $errorList, 'v' => $valueList));
     } else {
-        $user = DB::query("SELECT * FROM users WHERE email='%s'", $email);
-        if ($user == 0) {
+        $user = DB::queryOneRow("SELECT * FROM users WHERE email=%s AND password=%s", $email, $pass1);
+//        echo "<pre>\n";
+//        print_r($user);
+//        echo "</pre>\n\n";
+        if (empty($user)) {
             $app->render('login_failed.html.twig');
         } else {
-            $app->render('login_successful.html.twig');
+            $app->render('login_success.html.twig');
         }
     }
 });
 
-//$app->get('/postad(/:id)', function($id = '') use ($app, $log){
-//    if ($id === '') {
-//        $app->render('postad.html.twig');
-//        return;
-//    }
-//    $ad = DB::queryOneRow("SELECT * FROM ad WHERE ID=%d", $id);
-//    if (!$id) {
-//        $app->render('editad_notfound.html.twig', array('msg' => $msg, 'price' => $price, 'contactEmail' => $contactEmail));
-//    } else {
-//        $app->render('postad.html.twig', array('v' => $ad));
-//    }
-//});
+$app->get('/delete(/:id)', function($id = '') use ($app) {
+    DB::delete('users', "ID=%s", $id);
+    $app->render("delete.html.twig");
+});
 
-//$app->post('/editad/:id', function($id) use ($app){});
+
+$app->get('/logout', function() use ($app){
+    unset($_SESSION['user']);
+    $app->render('logout.html.twig');
+});
 
 $app->run();

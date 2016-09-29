@@ -36,39 +36,54 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
     {
         // line 6
         echo "
-<h3>Please <a href=\"index.php/register\">Register</a> or <a href=\"index.php/login\">Login</a></h3>
+<h7>You may <a href=\"/register\">Register</a> or <a href=\"/login\">Login</a> or <a href=\"/logout\">Log out</a></h7>
 
-<table border='1'>
+<br><br>
 ";
         // line 10
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["adList"]) ? $context["adList"] : null));
-        $context['_iterated'] = false;
-        foreach ($context['_seq'] as $context["_key"] => $context["ad"]) {
+        if ((isset($context["userList"]) ? $context["userList"] : null)) {
             // line 11
-            echo "    <tr><td> ";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "msg", array()), "html", null, true);
-            echo " </td><td> ";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "price", array()), "html", null, true);
-            echo " </td><td> ";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "contactEmail", array()), "html", null, true);
-            echo " </td><td><a href=\"/postad/";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ad"], "ID", array()), "html", null, true);
-            echo "\">Edit Ad</a></td></tr>
+            echo "    <table border=\"1\">
+        <tr>
+            <th>Name</th>
+            <th>email</th>
+            <th>Operations</th>
+        </tr>
+            ";
+            // line 17
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["userList"]) ? $context["userList"] : null));
+            foreach ($context['_seq'] as $context["_key"] => $context["u"]) {
+                // line 18
+                echo "            <tr>
+                <td>";
+                // line 19
+                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "name", array()), "html", null, true);
+                echo "</td>
+                <td>";
+                // line 20
+                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "email", array()), "html", null, true);
+                echo "</td>
+                <td><a href='/delete/";
+                // line 21
+                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "ID", array()), "html", null, true);
+                echo "'>Delete user</a></td>
+            </tr>
+            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['u'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 24
+            echo "    </table>
+    ";
+        } else {
+            // line 26
+            echo "        <p>There are no user yet</p>   
 ";
-            $context['_iterated'] = true;
         }
-        if (!$context['_iterated']) {
-            // line 13
-            echo "    <tr><td colspan='2'>No ads have been found</td><td><a href=\"/postad\">Post Ad</a></td></tr>
-";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ad'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 15
-        echo "</table>
-
+        // line 28
+        echo "
 ";
     }
 
@@ -84,7 +99,7 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
 
     public function getDebugInfo()
     {
-        return array (  70 => 15,  63 => 13,  49 => 11,  44 => 10,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  86 => 28,  82 => 26,  78 => 24,  69 => 21,  65 => 20,  61 => 19,  58 => 18,  54 => 17,  46 => 11,  44 => 10,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -95,15 +110,27 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
 
 {% block content %}
 
-<h3>Please <a href=\"index.php/register\">Register</a> or <a href=\"index.php/login\">Login</a></h3>
+<h7>You may <a href=\"/register\">Register</a> or <a href=\"/login\">Login</a> or <a href=\"/logout\">Log out</a></h7>
 
-<table border='1'>
-{% for ad in adList %}
-    <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td><td><a href=\"/postad/{{ad.ID}}\">Edit Ad</a></td></tr>
-{% else %}
-    <tr><td colspan='2'>No ads have been found</td><td><a href=\"/postad\">Post Ad</a></td></tr>
-{% endfor %}
-</table>
+<br><br>
+{% if userList %}
+    <table border=\"1\">
+        <tr>
+            <th>Name</th>
+            <th>email</th>
+            <th>Operations</th>
+        </tr>
+            {% for u in userList %}
+            <tr>
+                <td>{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td><a href='/delete/{{u.ID}}'>Delete user</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+        <p>There are no user yet</p>   
+{% endif %}
 
 {% endblock %}
 ";

@@ -11,3 +11,4 @@
 [2016-09-28 18:14:41] main.ERROR: SQL error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '** FROM ad' at line 1 [] []
 [2016-09-28 18:14:41] main.ERROR:  in query: SELECT *** FROM ad [] []
 [2016-09-28 18:48:11] main.DEBUG: Ad updateded with ID=1 [] []
+[2016-09-29 01:25:20] main.ERROR: Database error: Unable to connect to MySQL server! Error: No connection could be made because the target machine actively refused it.  [] []

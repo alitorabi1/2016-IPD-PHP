@@ -39,7 +39,7 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
         $this->displayBlock('content', $context, $blocks);
         echo "</div>
             <div id=\"footer\">
-                    &copy; Copyright 2016 by <a href=\"http://domain.invalid/\">you</a>.
+                    &copy; Copyright 2016 by slimstore 
             </div>
         </div>
     </body>
@@ -87,7 +87,7 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
         <div id=\"centerContent\">
             <div id=\"content\">{% block content %}{% endblock %}</div>
             <div id=\"footer\">
-                    &copy; Copyright 2016 by <a href=\"http://domain.invalid/\">you</a>.
+                    &copy; Copyright 2016 by slimstore 
             </div>
         </div>
     </body>

@@ -1,14 +1,14 @@
 <?php
 
-/* register_success.html.twig */
-class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2ddc3962 extends Twig_Template
+/* delete.html.twig */
+class __TwigTemplate_f8ade4d16b0ca60cae6daee92e84f041691ceaf7d16cf06b077838c10ded5f68 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("master.html.twig", "register_success.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "delete.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -28,7 +28,7 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "User login";
+        echo "User dlete";
     }
 
     // line 5
@@ -36,15 +36,15 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     {
         // line 6
         echo "
-<h3>You have been registered successfuly</h3>
-<p><a href=\"/\">Go to home</a></p>
+<h1>user was deleted successfully</h1>
+<a href=\"/login\">Go to home</a>
 
 ";
     }
 
     public function getTemplateName()
     {
-        return "register_success.html.twig";
+        return "delete.html.twig";
     }
 
     public function isTraitable()
@@ -61,12 +61,12 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     {
         return "{% extends \"master.html.twig\" %}
 
-{% block title %}User login{% endblock %}
+{% block title %}User dlete{% endblock %}
 
 {% block content %}
 
-<h3>You have been registered successfuly</h3>
-<p><a href=\"/\">Go to home</a></p>
+<h1>user was deleted successfully</h1>
+<a href=\"/login\">Go to home</a>
 
 {% endblock %}
 ";

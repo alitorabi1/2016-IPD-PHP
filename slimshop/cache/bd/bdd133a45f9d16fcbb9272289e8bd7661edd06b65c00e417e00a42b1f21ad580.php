@@ -1,14 +1,14 @@
 <?php
 
-/* register.html.twig */
-class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10dc67f extends Twig_Template
+/* login.html.twig */
+class __TwigTemplate_f7ecf66f5a40c3b78bc3fb6d44c34bfee83177cb08b84c5df3077cc5258601ce extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("master.html.twig", "register.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "login.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -28,7 +28,7 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "User registeration";
+        echo "User login";
     }
 
     // line 5
@@ -36,7 +36,7 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
     {
         // line 6
         echo "
-<h7>You may go to <a href=\"/\">home page</a> or <a href=\"/login\">login</a></h7>
+<h7>You may <a href=\"/register\">Register</a></h7>
 
 ";
         // line 9
@@ -63,19 +63,14 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
         }
         // line 16
         echo "
-<h1>Register user</h1>
+<h1>Login</h1>
 <form method=\"post\">
-    Name: <input type=\"text\" name=\"name\" value=\"";
-        // line 19
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "name", array()), "html", null, true);
-        echo "\"><br><br>
     Email: <input type=\"text\" name=\"email\" value=\"";
-        // line 20
+        // line 19
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "email", array()), "html", null, true);
         echo "\"><br><br>
-    Password: <input type=\"password\" name=\"pass1\"><br><br>
-    Password (repeated) <input type=\"password\" name=\"pass2\"><br><br>
-    <input type=\"submit\" value=\"Register\">
+    Password: <input type=\"password\" name=\"pass\"><br><br>
+    <input type=\"submit\" value=\"Login\">
 </form>
 
 ";
@@ -83,7 +78,7 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
 
     public function getTemplateName()
     {
-        return "register.html.twig";
+        return "login.html.twig";
     }
 
     public function isTraitable()
@@ -93,18 +88,18 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
 
     public function getDebugInfo()
     {
-        return array (  74 => 20,  70 => 19,  65 => 16,  61 => 14,  52 => 12,  48 => 11,  45 => 10,  43 => 9,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  70 => 19,  65 => 16,  61 => 14,  52 => 12,  48 => 11,  45 => 10,  43 => 9,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
     {
         return "{% extends \"master.html.twig\" %}
 
-{% block title %}User registeration{% endblock %}
+{% block title %}User login{% endblock %}
 
 {% block content %}
 
-<h7>You may go to <a href=\"/\">home page</a> or <a href=\"/login\">login</a></h7>
+<h7>You may <a href=\"/register\">Register</a></h7>
 
 {% if errorList %}
     <ul>
@@ -114,13 +109,11 @@ class __TwigTemplate_6dcbfbef8680eb5749561f2918a57e1454486c76e390c1099c3f8ad5c10
     </ul>
 {% endif %}
 
-<h1>Register user</h1>
+<h1>Login</h1>
 <form method=\"post\">
-    Name: <input type=\"text\" name=\"name\" value=\"{{v.name}}\"><br><br>
     Email: <input type=\"text\" name=\"email\" value=\"{{v.email}}\"><br><br>
-    Password: <input type=\"password\" name=\"pass1\"><br><br>
-    Password (repeated) <input type=\"password\" name=\"pass2\"><br><br>
-    <input type=\"submit\" value=\"Register\">
+    Password: <input type=\"password\" name=\"pass\"><br><br>
+    <input type=\"submit\" value=\"Login\">
 </form>
 
 {% endblock %}

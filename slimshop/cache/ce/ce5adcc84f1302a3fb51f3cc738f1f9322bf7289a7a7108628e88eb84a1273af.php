@@ -1,14 +1,14 @@
 <?php
 
-/* register_success.html.twig */
-class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2ddc3962 extends Twig_Template
+/* login_success.html.twig */
+class __TwigTemplate_e046ad7d5cd6eee575b1e8beb5c1ddc7aadc6583ab99134b4a4b6b27a37f56ef extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("master.html.twig", "register_success.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "login_success.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -36,7 +36,7 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     {
         // line 6
         echo "
-<h3>You have been registered successfuly</h3>
+<h3>You have been logined successfuly</h3>
 <p><a href=\"/\">Go to home</a></p>
 
 ";
@@ -44,7 +44,7 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
 
     public function getTemplateName()
     {
-        return "register_success.html.twig";
+        return "login_success.html.twig";
     }
 
     public function isTraitable()
@@ -65,7 +65,7 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
 
 {% block content %}
 
-<h3>You have been registered successfuly</h3>
+<h3>You have been logined successfuly</h3>
 <p><a href=\"/\">Go to home</a></p>
 
 {% endblock %}

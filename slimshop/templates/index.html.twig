@@ -4,14 +4,26 @@
 
 {% block content %}
 
-<h3>Please <a href="index.php/register">Register</a> or <a href="index.php/login">Login</a></h3>
+<h7>You may <a href="/register">Register</a> or <a href="/login">Login</a> or <a href="/logout">Log out</a></h7>
 
-<table border='1'>
-{% for ad in adList %}
-    <tr><td> {{ ad.msg }} </td><td> {{ad.price}} </td><td> {{ad.contactEmail}} </td><td><a href="/postad/{{ad.ID}}">Edit Ad</a></td></tr>
-{% else %}
-    <tr><td colspan='2'>No ads have been found</td><td><a href="/postad">Post Ad</a></td></tr>
-{% endfor %}
-</table>
+<br><br>
+{% if userList %}
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>email</th>
+            <th>Operations</th>
+        </tr>
+            {% for u in userList %}
+            <tr>
+                <td>{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td><a href='/delete/{{u.ID}}'>Delete user</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+        <p>There are no user yet</p>   
+{% endif %}
 
 {% endblock %}
