@@ -36,7 +36,7 @@ class __TwigTemplate_f7ecf66f5a40c3b78bc3fb6d44c34bfee83177cb08b84c5df3077cc5258
     {
         // line 6
         echo "
-<h7>You may <a href=\"/register\">Register</a></h7>
+<h7>You may <a href=\"/register\">register</a> or go to <a href=\"/\">home page</a></h7>
 
 ";
         // line 9
@@ -99,7 +99,7 @@ class __TwigTemplate_f7ecf66f5a40c3b78bc3fb6d44c34bfee83177cb08b84c5df3077cc5258
 
 {% block content %}
 
-<h7>You may <a href=\"/register\">Register</a></h7>
+<h7>You may <a href=\"/register\">register</a> or go to <a href=\"/\">home page</a></h7>
 
 {% if errorList %}
     <ul>

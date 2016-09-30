@@ -1,0 +1,8 @@
+[2016-09-30 19:31:47] main.ERROR: SQL error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '** FROM todoitems' at line 1 [] []
+[2016-09-30 19:31:47] main.ERROR:  in query: SELECT *** FROM todoitems [] []
+[2016-09-30 19:38:45] main.ERROR: SQL error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '** FROM todoitems' at line 1 [] []
+[2016-09-30 19:38:45] main.ERROR:  in query: SELECT *** FROM todoitems [] []
+[2016-09-30 19:46:26] main.ERROR: SQL error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '** FROM todoitems' at line 1 [] []
+[2016-09-30 19:46:26] main.ERROR:  in query: SELECT *** FROM todoitems [] []
+[2016-09-30 19:46:41] main.ERROR: SQL error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '** FROM todoitems' at line 1 [] []
+[2016-09-30 19:46:41] main.ERROR:  in query: SELECT *** FROM todoitems [] []

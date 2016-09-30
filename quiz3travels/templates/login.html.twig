@@ -1,0 +1,19 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Successful registration{% endblock %}
+
+{% block content %}
+    
+<h1>Login</h1>
+
+{% if loginFailed %}
+    <p>Invalid username or password</p>
+{% endif %}
+
+<form method="post">
+    Passport: <input type="text" name="passport"><br>
+    Password: <input type="password" name="pass"><br>
+    <input type="submit" value="Login">
+</form>
+
+{% endblock %}

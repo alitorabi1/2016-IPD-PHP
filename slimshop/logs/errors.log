@@ -1,0 +1,1 @@
+[2016-09-29 15:01:46] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []

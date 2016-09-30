@@ -1,0 +1,34 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Travels{% endblock %}
+
+{% block content %}
+
+    <h1>Welcome to travels</h1>
+
+    {% if sessionUser %}
+        <p>Hello {{sessionUser.name}} ({{sessionUser.passport}}).
+            You may <a href="/book">book</a> or <a href="/logout">logout</a>.</p>
+            {% if valueList %} 
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>From airport</th>
+                    <th>To airport</th>
+                </tr>
+                {% for v in valueList %}
+                    <tr>
+                        <td>{{v.ID}}</td>
+                        <td>{{v.fromAirport}}</td>
+                        <td>{{v.toAirport}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>There are no booking items to show</p>   
+        {% endif %}
+    {% else %}
+        <p>You may <a href="/login">login</a> or <a href="/register">register</a>.</p>
+    {% endif %}
+
+{% endblock %}

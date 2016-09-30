@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(document).$ajaxError(function () {
+                alert("Ajax request failed");
+            });
+            $(document).ready(function () {
+                $("#refresh").click(function () {
+                    $.ajax({
+                        url: "/api.php/todoitems",
+                        //data: {},
+                        type: "GET",
+                        dataType: "json"
+                    }).done(function (data) {
+                        var result = '';
+                        for (var i = 0; i < data.length; i++) {
+                            var item = data[i];
+                            result += "<p>" + item.ID + ": " + item.title + "</p>\n";
+                        }
+                        $("#todolist").html(result);
+                    });
+                });
+
+                $("#addtodo").click(function () {
+                    $.ajax({
+                        url: "/api.php/todoitems",
+                        data: JSON.stringify({
+                            title: $("#input[name=title]").val(),
+                            dueDate: $("#input[name=dueDate]").val(),
+                            isDone: false
+                        }),
+                        type: "POST",
+                        dataType: "json"
+                    }).done(function () {
+                        alert("addea successfuly");
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="refresh">refresh list</button>
+        <div id="todolist"></div>
+        <form>
+            <h1>Create todo item:</h1>
+            Title: <input type="text" name="title"><br>
+            Due date: <input type="text" name="dueDate"><br>
+            <button id="addtodo">Add todo</button>
+        </form>
+    </body>
+</html>

@@ -13,8 +13,8 @@ $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
 DB::$dbName = 'slimshop';
 DB::$user = 'slimshop';
-DB::$password = "BJZSdfS92F4fB2en";
-//DB::$password = "hdpuJCL668ADQbnM";
+//DB::$password = "BJZSdfS92F4fB2en";
+DB::$password = "hdpuJCL668ADQbnM";
 //DB::$password = "FnsNbTteESvUXGFj";
 //DB::$host = '127.0.0.1'; // sometimes needed for MAX
 DB::$error_handler = 'sql_error_handler';
@@ -55,6 +55,13 @@ $app->get('/', function() use ($app) {
     $app->render('index.html.twig', array('userList' => $userList));
 });
 
+$app->get('/emailexists/:email', function($email) use ($app, $log) {
+    $user = DB::queryFirstRow("SELECT ID FROM users WHERE email=%s", $email);
+    if ($user) {
+        echo "Email already registered";
+    }
+});
+    
 $app->get('/register', function() use ($app){
     $app->render('register.html.twig');
 });
@@ -87,7 +94,7 @@ $app->post('/register', function() use ($app, $log){
     if ($errorList) {
         $app->render('register.html.twig', array('errorList' => $errorList, 'v' => $valueList));
     } else {
-        DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $pass1));
+        DB::insert('users', array('name' => $name, 'email' => $email, 'password' => sha256($pass1)));
         $id = DB::insertId();
         $log->debug("User created with ID=" . $id);
         $app->render('register_success.html.twig', array('name' => $name, 'email' => $email, 'pass1' => $pass1));
@@ -98,30 +105,27 @@ $app->get('/login', function() use ($app){
     $app->render('login.html.twig');
 });
 
-$app->post('/login', function() use ($app, $log){
-//    echo 'Not implemented yet.';
+$app->post('/login', function() use ($app, $log) {
     $email = $app->request->post('email');
-    $pass1 = $app->request->post('pass');
-    $valueList = array('email' => $email, 'pass1' => $pass1);
-    $errorList = array();
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE || $email === "") {
-        array_push($errorList, "Email is empty or does not look like a valid email");
-    }
-    if ($pass1 === "") {
-        array_push($errorList, "Password can not be empty");
-    }
-
-    if ($errorList) {
-        $app->render('login.html.twig', array('errorList' => $errorList, 'v' => $valueList));
+    $pass = $app->request->post('pass');
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);    
+    if (!$user) {
+        $log->debug(sprintf("User failed for email %s from IP %s",
+                    $email, $_SERVER['REMOTE_ADDR']));
+        $app->render('login.html.twig', array('loginFailed' => TRUE));
     } else {
-        $user = DB::queryOneRow("SELECT * FROM users WHERE email=%s AND password=%s", $email, $pass1);
-//        echo "<pre>\n";
-//        print_r($user);
-//        echo "</pre>\n\n";
-        if (empty($user)) {
-            $app->render('login_failed.html.twig');
-        } else {
+        // password MUST be compared in PHP because SQL is case-insenstive
+        if ($user['password'] == hash('sha256', $pass)) {
+            // LOGIN successful
+            unset($user['password']);
+            $_SESSION['user'] = $user;
+            $log->debug(sprintf("User %s logged in successfuly from IP %s",
+                    $user['ID'], $_SERVER['REMOTE_ADDR']));
             $app->render('login_success.html.twig');
+        } else {
+            $log->debug(sprintf("User failed for email %s from IP %s",
+                    $email, $_SERVER['REMOTE_ADDR']));
+            $app->render('login.html.twig', array('loginFailed' => TRUE));            
         }
     }
 });

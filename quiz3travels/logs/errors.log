@@ -1,0 +1,2 @@
+[2016-09-29 17:37:30] main.ERROR: SQL error: Table 'quiz3travels.users' doesn't exist [] []
+[2016-09-29 17:37:30] main.ERROR:  in query: SELECT * FROM users WHERE passport='AS1236548' [] []
