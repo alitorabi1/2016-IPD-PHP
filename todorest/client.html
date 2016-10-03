@@ -2,55 +2,145 @@
 <html>
     <head>
         <title>TODO supply a title</title>
+        <style>
+            .arrange-horizontally > * {
+                display: inline-block;
+                text-align: center;
+            }
+            .arrange-vertically > * {
+                display: block;
+            }
+            #todoList {
+                width: 300px;
+                float: left;
+                background-color: buttonface;
+            }
+            #divRight {
+                width: 400px;
+                background-color: chartreuse;
+            }
+            #divViewItem {
+                width: 400px;
+                background-color: beige;
+            }
+        </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>
-            $(document).$ajaxError(function () {
-                alert("Ajax request failed");
+            $(document).ajaxError(function () {
+                alert("AJAX request failed");
             });
-            $(document).ready(function () {
-                $("#refresh").click(function () {
-                    $.ajax({
-                        url: "/api.php/todoitems",
-                        //data: {},
-                        type: "GET",
-                        dataType: "json"
-                    }).done(function (data) {
-                        var result = '';
-                        for (var i = 0; i < data.length; i++) {
-                            var item = data[i];
-                            result += "<p>" + item.ID + ": " + item.title + "</p>\n";
-                        }
-                        $("#todolist").html(result);
-                    });
+            function getTable() {
+                $.ajax({
+                    url: "/api.php/todoitems",
+                    // data: {},
+                    type: "GET",
+                    dataType: "json"
+                }).done(function (data) {
+                    var result = '';
+                    result += "<tr><th>#</th><th>Title</th><th>Due date</th><th>Is done?</th></tr>"
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        result += "<tr><td>" + item.ID + "</td><td>" + item.title + "</td><td>" + item.dueDate + "</td><td>" + ((item.isDone === 'true') ? 'y' : 'n') + "</td></tr>\n";
+                    }
+                    $("#tblItems").html(result);
                 });
-
-                $("#addtodo").click(function () {
+            }
+            function getViewItem(id) {
+                $.ajax({
+                    url: "/api.php/todoitems/" + id,
+                    // data: {},
+                    type: "GET",
+                    dataType: "json"
+                }).done(function (data) {
+                    var result = '';
+                    result += "<h3>View todo item:</h3>";
+                    result += "<input type='hidden' id='id' name='id' value=" + data.ID + "><br>";
+                    result += "Title: <input type='text' id='title1' name='title1' value=" + data.title + "><br>";
+                    result += "dueDate: <input type='text' id='dueDate1' name='dueDate1' value=" + data.dueDate + "><br>";
+                    if (data.isDone === 'true') {
+                        result += "Is done: <input type='checkbox' id='isDone' name='isDone' checked><br>";
+                    } else {
+                        result += "Is done: <input type='checkbox' id='isDone' name='isDone'><br>";
+                    }
+                    result += "<input type='button' id='save' name='save' value='Save'>&nbsp;&nbsp;&nbsp;";
+                    result += "<input type='button' id='cancel' name='cancel' value='Cancel'>&nbsp;&nbsp;&nbsp;";
+                    result += "<input type='button' id='delete' name='delete' value='Delete'>";
+                    $("#formView").html(result);
+                });
+            }
+            $(document).ready(function () {
+                $(window).load(function () {
+                    getTable();
+                });
+                $("#addTodo").click(function () {
                     $.ajax({
                         url: "/api.php/todoitems",
                         data: JSON.stringify({
-                            title: $("#input[name=title]").val(),
-                            dueDate: $("#input[name=dueDate]").val(),
-                            isDone: false
+                            title: $("input[name=title]").val(),
+                            dueDate: $("input[name=dueDate]").val(),
+                            isDone: 'false'
                         }),
                         type: "POST",
                         dataType: "json"
                     }).done(function () {
-                        alert("addea successfuly");
+                        getTable();
                     });
+                });
+                $("#tblItems").on("click", "td:nth-child(2)", function () {
+//                    alert($(this).prev().html());
+                    getViewItem($(this).prev().html());
+                });
+                $("#save").click(function () {
+                    $.ajax({
+                        url: "/api.php/todoitems/" + $("input[name=id]").val(),
+                        data: JSON.stringify({
+                            title: $("input[name=title1]").val(),
+                            dueDate: $("input[name=dueDate1]").val(),
+                            isDone: ($get("input[name=isDone]").checked === true) ? 'true' : 'false'
+                        }),
+                        type: "PUT",
+                        dataType: "json"
+                    }).done(function () {
+                        getTable();
+                    });
+                });
+                $("input[name=delete]").click(function () {
+                    $.ajax({
+                        url: '/api.php/todoitems/' + $("input[name=id]").val(),
+                        type: 'DELETE',
+//                            dataType: "json"
+                    }).done(function () {
+//                        alert($("input[name=id]").val());
+                        getTable();
+                    });
+                });
+                $("#cancel").click(function () {
+//                        alert($("input[name=id]").val());
+                    $("#divViewItem").html("");
                 });
             });
         </script>
     </head>
     <body>
-        <button id="refresh">refresh list</button>
-        <div id="todolist"></div>
-        <form>
-            <h1>Create todo item:</h1>
-            Title: <input type="text" name="title"><br>
-            Due date: <input type="text" name="dueDate"><br>
-            <button id="addtodo">Add todo</button>
-        </form>
+        <!--button id="refresh">Refresh list</button-->
+        <div class="arrange-horizontally">
+            <div id="todoList"><table border id="tblItems"></table></div>
+            <div id="divRight" class="arrange-vertically">
+                <div id="divAddItem">
+                    <h3>Create todo item:</h3>
+                    Title: <input type="text" name="title"><br>
+                    dueDate: <input type="text" name="dueDate"><br>            
+                    <button id="addTodo">Add todo</button>
+                </div>
+
+                <div id="divViewItem">
+                    <form id="formView" method="post">
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </body>
 </html>

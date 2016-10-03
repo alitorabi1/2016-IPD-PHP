@@ -20,3 +20,4 @@
 [2016-09-29 05:26:16] main.DEBUG: User created with ID=4 [] []
 [2016-09-29 15:01:46] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
 [2016-09-29 15:09:06] main.DEBUG: User created with ID=3 [] []
+[2016-10-03 04:18:43] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
