@@ -2,10 +2,10 @@ hongkiat
 symphony
 ruby
 Yii 2 (yes it is)
-
+geek-domains.com
+tooniehosting.ca/plans.php
 
 ------------------
-
 SQL
 
 . . . LIMIT COUNT
@@ -13,4 +13,12 @@ LIMIT 10
 
 LIMIT SKIP COUNT
 LIMIT 10 20 = select 20 items from 11 th record
+----------------------------------
+
+http://stackoverflow.com/questions/5660050/what-is-serialization-and-deserialization-conceptually
+http://stackoverflow.com/questions/383692/what-is-json-and-why-would-i-use-it
+why we use jaon?
+because of it is javascript based and it immedieely deserialize the string we send on it
+
+create data php (when we say: data: JSON.stringify({ . . . })) -> serialize with json -> send it in http to javascript -> it understand to parse(deserialise) it to show in browser
 

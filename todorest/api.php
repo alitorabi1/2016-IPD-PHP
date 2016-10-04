@@ -12,8 +12,8 @@ $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
 DB::$dbName = 'todorest';
 DB::$user = 'todorest';
-//DB::$password = 'b27ZsLbNsPbGVqKM';
-DB::$password = 'cXYzQb4PSyfQA2ze';
+DB::$password = 'b27ZsLbNsPbGVqKM';
+//DB::$password = 'cXYzQb4PSyfQA2ze';
 
 DB::$error_handler = 'sql_error_handler';
 DB::$nonsql_error_handler = 'nonsql_error_handler';
