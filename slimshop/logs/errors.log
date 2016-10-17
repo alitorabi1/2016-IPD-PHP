@@ -1,2 +1,5 @@
-[2016-09-29 15:01:46] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
-[2016-10-03 04:18:43] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
+[2016-10-13 16:37:39] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
+[2016-10-13 16:37:44] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
+[2016-10-13 16:50:35] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
+[2016-10-13 16:51:27] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []
+[2016-10-13 16:51:30] main.ERROR: Database error: Unable to connect to MySQL server! Error: Access denied for user 'slimshop'@'localhost' (using password: YES) [] []

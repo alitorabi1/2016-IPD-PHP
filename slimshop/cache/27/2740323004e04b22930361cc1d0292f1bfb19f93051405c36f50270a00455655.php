@@ -35,12 +35,14 @@ class __TwigTemplate_29d36837ddfcc155c22fb74fb6dfca6c66adcf4bee08b0f0aefc194fb0b
     public function block_content($context, array $blocks = array())
     {
         // line 6
-        echo "
-<h1>Internal error</h1>
-<p>Our apologise. We've encounter an internal error in our system.
-    Our technical team has been notified.</p>
-<a href='/'>Click to continue</a>
-
+        echo "    <h1>Internal error</h1>
+    <img src=\"/media/ninja.png\" width=\"150\">
+    <p>We're very sorry, we failed to fulfill your request.
+        Our team of coding black ninjas has already
+        been notified of your trouble.</p>
+    <p><a href=\"/\">Click here</a> to continue</p>
+    
+    
 ";
     }
 
@@ -66,12 +68,14 @@ class __TwigTemplate_29d36837ddfcc155c22fb74fb6dfca6c66adcf4bee08b0f0aefc194fb0b
 {% block title %}Internal error{% endblock %}
 
 {% block content %}
-
-<h1>Internal error</h1>
-<p>Our apologise. We've encounter an internal error in our system.
-    Our technical team has been notified.</p>
-<a href='/'>Click to continue</a>
-
+    <h1>Internal error</h1>
+    <img src=\"/media/ninja.png\" width=\"150\">
+    <p>We're very sorry, we failed to fulfill your request.
+        Our team of coding black ninjas has already
+        been notified of your trouble.</p>
+    <p><a href=\"/\">Click here</a> to continue</p>
+    
+    
 {% endblock %}
 ";
     }

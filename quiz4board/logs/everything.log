@@ -1,0 +1,8 @@
+[2016-10-04 15:43:06] main.DEBUG: POST /todoitems verification failed: Invalid number of fields in data provided [] []
+[2016-10-04 16:00:51] main.DEBUG: POST /todoitems verification failed: Seller Name is not valid [] []
+[2016-10-04 16:01:04] main.DEBUG: POST /todoitems verification failed: Description Name is not valid [] []
+[2016-10-04 16:02:18] main.DEBUG: POST /todoitems verification failed: Seller Name is not valid [] []
+[2016-10-04 16:06:36] main.DEBUG: POST /todoitems verification failed: Price must be provided and must be a number [] []
+[2016-10-04 16:06:46] main.DEBUG: POST /todoitems verification failed: Price must be provided and must be a number [] []
+[2016-10-04 16:07:49] main.DEBUG: POST /todoitems verification failed: Price must be provided and must be a number [] []
+[2016-10-04 16:31:29] main.DEBUG: POST /todoitems verification failed: Seller Name is not valid [] []

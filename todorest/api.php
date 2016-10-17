@@ -14,7 +14,6 @@ DB::$dbName = 'todorest';
 DB::$user = 'todorest';
 DB::$password = 'b27ZsLbNsPbGVqKM';
 //DB::$password = 'cXYzQb4PSyfQA2ze';
-
 DB::$error_handler = 'sql_error_handler';
 DB::$nonsql_error_handler = 'nonsql_error_handler';
 
@@ -39,7 +38,6 @@ function sql_error_handler($params) {
     die; // don't want to keep going if a query broke
 }
 
-
 $app = new \Slim\Slim();
 
 \Slim\Route::setDefaultConditions(array(
@@ -48,7 +46,7 @@ $app = new \Slim\Slim();
 
 $app->response->headers->set('content-type', 'application/json');
 
-function isTodoItemValid($todo) {
+function isTodoItemValid($todo, &$error, $skipID = FALSE) {
     /* TODO: validate the following:
      * 1. All fields ID, title, dueDate, isDone are present and none other
      * 2. ID is valid numercial value 1 or graeter
@@ -57,16 +55,67 @@ function isTodoItemValid($todo) {
      * 5. isDone is either 'true' or 'false'
      * In case of failed validation requirement $log->debug() the reason.
      */
+    if (count($todo) != ($skipID ? 3 : 4)) {
+        $error = 'Invalid number of fields in data provided';
+        return FALSE;
+    }
+    if (!$skipID) {
+        if ((!isset($todo['ID']) || (!is_numeric($todo['ID'])))) {
+            $error = 'ID must be provided and must be a number';
+            return FALSE;
+        }
+    }
+    if (!isset($todo['title']) || !isset($todo['dueDate']) || !isset($todo['isDone'])) {
+        $error = 'The passed fields do not correspond to the expected list';
+        return FALSE;
+    }
+    if (strlen($todo['title']) < 1 || strlen($todo['title']) > 100) {
+        $error = 'Title is not valid';
+        return FALSE;
+    }
+    if (!in_array($todo['isDone'], array('true', 'false'))) {
+        $error = 'isDone is not true nor false';
+        return FALSE;
+    }
+    $f = 'Y-m-d';
+    $tempDate = explode('-', $todo['dueDate']);
+    if (count($tempDate) != 3) {
+        $error = 'dueDate is not in the correct format';
+        return FALSE;
+    } elseif (!checkdate($tempDate[1], $tempDate[2], $tempDate[0])
+            || date($todo['dueDate'], $f) < date('2000-01-01', $f)
+            || date($todo['dueDate'], $f) > date('2099-01-01', $f)) {
+        $error = 'dueDate could not be parsed into a valid date between 2000-01-01 and 2099-01-01';
+        return FALSE;
+    }
     return TRUE;
 }
 
+function getAuthUserID() {
+    global $app, $log;
+    $username = $app->request->headers("PHP_AUTH_USER");
+    $password = $app->request->headers("PHP_AUTH_PW");
+    if ($username && $password) {
+        $row = DB::queryFirstRow("SELECT * from users WHERE email=%s", $username);
+        if ($row && $row['password'] == $password) {
+            return $row['ID'];
+        }
+    }
+    $log->debug("Basic auth failed for user" . $username);
+    $app->response->status(401); // Access denied, authentication required
+    $app->response->header('WWW-Authenticate', "Basic realm=TodoApp");
+    return FALSE;
+}
 
 $app->get('/todoitems', function() {
-    $recordList = DB::query("SELECT * FROM todoitems");
+    $userID = getAuthUserID();
+    if (!$userID) return;
+    $recordList = DB::query("SELECT * FROM todoitems WHERE userID=%d", $userID);
     echo json_encode($recordList, JSON_PRETTY_PRINT);
 });
 
 $app->get('/todoitems/:ID', function($ID) use ($app) {
+//    sleep(1);
     $record = DB::queryFirstRow("SELECT * FROM todoitems WHERE ID=%d", $ID);
     // 404 if record not found
     if (!$record) {
@@ -82,13 +131,15 @@ $app->delete('/todoitems/:ID', function($ID) {
     echo 'true';
 });
 
-$app->post('/todoitems', function() use ($app) {
+$app->post('/todoitems', function() use ($app, $log) {
     $body = $app->request->getBody();
     $record = json_decode($body, TRUE);
     // FIXME: verify $record contains all and only fields required with valid values
-    if (!isTodoItemValid($record)) {
+    if (!isTodoItemValid($record, $error, TRUE)) {
         $app->response->setStatus(400);
-        echo json_encode("Bad request - data validation failed");
+        $log->debug("POST /todoitems verification failed: " . $error);
+        echo json_encode($error);
+        //echo json_encode("Bad request - data validation failed");
         return;
     }
     DB::insert('todoitems', $record);
@@ -102,8 +153,9 @@ $app->put('/todoitems/:ID', function($ID) use ($app) {
     $record = json_decode($body, TRUE);
     $record['ID'] = $ID; // prevent changing of ID
     // FIXME: verify $record contains all and only fields required with valid values
-    if (!isTodoItemValid($record)) {
+    if (!isTodoItemValid($record, $error)) {
         $app->response->setStatus(400);
+        $log->debug("POST /todoitems verification failed: " . $error);
         echo json_encode("Bad request - data validation failed");
         return;
     }

@@ -1,0 +1,23 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h7>You may <a href="/register">Register</a> or <a href="/login">Login</a> or <a href="/logout">Log out</a></h7>
+
+
+    {% for product in productList%}
+        <hr><div><h3>{{product.name}}</h3>
+                <img height="100" src="/images/{{product.imagePath}}">
+                <p>{{product.description}}</p>
+                <p>Price per unit {{product.price}}</p>
+                <form method="post" action="/cart">
+                <input type="hidden" name="productID" value="{{product.ID}}">
+                Add to cart <input name="quantity" type="number" value="1" size="2" style="width: 30px;">
+                <input type="submit" value="Add to cart">
+                </form>
+                </div>
+    {% endfor %}
+
+{% endblock %}

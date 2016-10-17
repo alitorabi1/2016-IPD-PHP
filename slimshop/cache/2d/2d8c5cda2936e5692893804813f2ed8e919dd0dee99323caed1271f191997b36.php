@@ -28,17 +28,15 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "User login";
+        echo "Successful registration";
     }
 
     // line 5
     public function block_content($context, array $blocks = array())
     {
         // line 6
-        echo "
-<h3>You have been registered successfuly</h3>
-<p><a href=\"/\">Go to home</a></p>
-
+        echo "    <h1>Registration successful</h1>
+    <a href=\"/login\">Click to login</a>
 ";
     }
 
@@ -61,13 +59,11 @@ class __TwigTemplate_d7b7f4e9c00281dda3dbed796c0aaa0f0420913c118410be670689ba2dd
     {
         return "{% extends \"master.html.twig\" %}
 
-{% block title %}User login{% endblock %}
+{% block title %}Successful registration{% endblock %}
 
 {% block content %}
-
-<h3>You have been registered successfuly</h3>
-<p><a href=\"/\">Go to home</a></p>
-
+    <h1>Registration successful</h1>
+    <a href=\"/login\">Click to login</a>
 {% endblock %}
 ";
     }

@@ -27,19 +27,21 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
+        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js\"></script>
         ";
-        // line 6
+        // line 7
         $this->displayBlock('head', $context, $blocks);
-        // line 8
+        // line 9
         echo "    </head>
     <body>
         <div id=\"centerContent\">
+            <a href=\"/cart\">View cart</a>
             <div id=\"content\">";
-        // line 11
+        // line 13
         $this->displayBlock('content', $context, $blocks);
         echo "</div>
-            <div id=\"footer\">
-                    &copy; Copyright 2016 by slimstore 
+            <div id=\"footer\">                
+                    &copy; Copyright 2016 by <a href=\"http://domain.invalid/\">you</a>.
             </div>
         </div>
     </body>
@@ -51,14 +53,14 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
     {
     }
 
-    // line 6
+    // line 7
     public function block_head($context, array $blocks = array())
     {
-        // line 7
+        // line 8
         echo "        ";
     }
 
-    // line 11
+    // line 13
     public function block_content($context, array $blocks = array())
     {
     }
@@ -70,7 +72,7 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
 
     public function getDebugInfo()
     {
-        return array (  62 => 11,  58 => 7,  55 => 6,  50 => 5,  39 => 11,  34 => 8,  32 => 6,  28 => 5,  22 => 1,);
+        return array (  64 => 13,  60 => 8,  57 => 7,  52 => 5,  41 => 13,  35 => 9,  33 => 7,  28 => 5,  22 => 1,);
     }
 
     public function getSource()
@@ -80,14 +82,16 @@ class __TwigTemplate_7a707a449d7ce7f2c374feadf160afc6deb3277444120b679939ebd9c29
     <head>
         <link rel=\"stylesheet\" href=\"/styles.css\" />
         <title>{% block title %}{% endblock %}</title>
+        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js\"></script>
         {% block head %}
         {% endblock %}
     </head>
     <body>
         <div id=\"centerContent\">
+            <a href=\"/cart\">View cart</a>
             <div id=\"content\">{% block content %}{% endblock %}</div>
-            <div id=\"footer\">
-                    &copy; Copyright 2016 by slimstore 
+            <div id=\"footer\">                
+                    &copy; Copyright 2016 by <a href=\"http://domain.invalid/\">you</a>.
             </div>
         </div>
     </body>

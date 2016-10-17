@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz4board title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+
+
+            var currentID = 0; // 0 means nothing is selected
+
+            function selectItem(itemID) {
+                currentID = itemID;
+            }
+
+
+            function refreshTodoList() {
+                $.ajax({
+                    url: "/api.php/todoitems",
+                    // data: {},
+                    type: "GET",
+                    dataType: "json"
+                }).done(function (data) {
+                    var result = '<tr><th>#</th><th>Seller</th><th>Price</th>'
+                            + '<th>Description</th><th>Operation</th></tr>';
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        result += '<tr onclick="selectItem(' + item.ID + ')">';
+                        result += '<td>' + item.ID + '</td>';
+                        result += '<td>' + item.sellerName + '</td>';
+                        result += '<td>' + item.price + '</td>';
+                        result += '<td>' + item.description + '</td>';
+                        result += '<td><img id="imgDelete" src="Recycle_Bin_Full.png" width="25px"></td>';
+                        result += '</tr>';
+                    }
+                    $("#listTable").html(result);
+                });
+            }
+
+            $(document).ajaxError(function () {
+                alert("AJAX request failed");
+            });
+            $(document).ready(function () {
+                refreshTodoList();
+
+                $("#saveOrAdd").click(function () {
+                    var sellerName = $("input[name=sellerName]").val();
+                    var description = $("input[name=description]").val();
+                    var price = $("input[name=price]").val();
+                        // INSERT
+                        $.ajax({
+                            url: "/api.php/todoitems",
+                            statusCode: {
+                                400: function (xhr) {
+                                    var msg = xhr.responseText;
+                                    alert("400 received: " + msg);
+                                }
+                            },
+                            data: JSON.stringify({
+                                sellerName: sellerName,
+                                description: description,
+                                price: price
+                            }),
+                            type: "POST",
+                            dataType: "json"
+                        }).done(function () {
+                            alert("Addedd successfully");
+                            refreshTodoList();
+                        });
+                });
+                $("#imgDelete").click(function () {
+                    if (currentID == 0)
+                        return;
+                    $.ajax({
+                        url: "/api.php/todoitems/" + currentID,
+                        data: {},
+                        type: "DELETE",
+                        dataType: "json"
+                    }).done(function () {
+                        alert("Deleted successfully");
+                        refreshTodoList();
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="viewAddEditPane">
+            Current ID: <span id="currentID"></span><br><br>
+            Seller name: <input type="text" name="sellerName"><br><br>
+            Price: <input type="number" name="price" step="any"><br><br>
+            Description: <input type="text" name="description"><br><br>
+            <button id="saveOrAdd">Post Ad</button>
+        </div>
+        <br><br><hr>
+        <div id="centerContent">
+            <!-- left list -->
+            <div id="listPane">
+                <table id="listTable">
+
+                </table>
+
+            </div>
+        </div>
+    </body>
+</html>

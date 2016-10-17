@@ -28,48 +28,28 @@ class __TwigTemplate_f7ecf66f5a40c3b78bc3fb6d44c34bfee83177cb08b84c5df3077cc5258
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "User login";
+        echo "Successful registration";
     }
 
     // line 5
     public function block_content($context, array $blocks = array())
     {
         // line 6
-        echo "
-<h7>You may <a href=\"/register\">register</a> or go to <a href=\"/\">home page</a></h7>
+        echo "    
+<h1>Login</h1>
 
 ";
         // line 9
-        if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
+        if ((isset($context["loginFailed"]) ? $context["loginFailed"] : null)) {
             // line 10
-            echo "    <ul>
-        ";
-            // line 11
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["errorList"]) ? $context["errorList"] : null));
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 12
-                echo "            <li>";
-                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-                echo "</li>
-        ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 14
-            echo "    </ul>
+            echo "    <p>Invalid username or password</p>
 ";
         }
-        // line 16
+        // line 12
         echo "
-<h1>Login</h1>
 <form method=\"post\">
-    Email: <input type=\"text\" name=\"email\" value=\"";
-        // line 19
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "email", array()), "html", null, true);
-        echo "\"><br><br>
-    Password: <input type=\"password\" name=\"pass\"><br><br>
+    Email: <input type=\"text\" name=\"email\"><br>
+    Password: <input type=\"password\" name=\"pass\"><br>
     <input type=\"submit\" value=\"Login\">
 </form>
 
@@ -88,31 +68,26 @@ class __TwigTemplate_f7ecf66f5a40c3b78bc3fb6d44c34bfee83177cb08b84c5df3077cc5258
 
     public function getDebugInfo()
     {
-        return array (  70 => 19,  65 => 16,  61 => 14,  52 => 12,  48 => 11,  45 => 10,  43 => 9,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  49 => 12,  45 => 10,  43 => 9,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
     {
         return "{% extends \"master.html.twig\" %}
 
-{% block title %}User login{% endblock %}
+{% block title %}Successful registration{% endblock %}
 
 {% block content %}
+    
+<h1>Login</h1>
 
-<h7>You may <a href=\"/register\">register</a> or go to <a href=\"/\">home page</a></h7>
-
-{% if errorList %}
-    <ul>
-        {% for error in errorList %}
-            <li>{{error}}</li>
-        {% endfor %}
-    </ul>
+{% if loginFailed %}
+    <p>Invalid username or password</p>
 {% endif %}
 
-<h1>Login</h1>
 <form method=\"post\">
-    Email: <input type=\"text\" name=\"email\" value=\"{{v.email}}\"><br><br>
-    Password: <input type=\"password\" name=\"pass\"><br><br>
+    Email: <input type=\"text\" name=\"email\"><br>
+    Password: <input type=\"password\" name=\"pass\"><br>
     <input type=\"submit\" value=\"Login\">
 </form>
 

@@ -28,7 +28,7 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "Home";
+        echo "e-shop";
     }
 
     // line 5
@@ -36,53 +36,66 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
     {
         // line 6
         echo "
-<h7>You may <a href=\"/register\">Register</a> or <a href=\"/login\">Login</a> or <a href=\"/logout\">Log out</a></h7>
+    <h1>Welcome to e-shop</h1>
 
-<br><br>
-";
-        // line 10
-        if ((isset($context["userList"]) ? $context["userList"] : null)) {
-            // line 11
-            echo "    <table border=\"1\">
-        <tr>
-            <th>Name</th>
-            <th>email</th>
-            <th>Operations</th>
-        </tr>
-            ";
-            // line 17
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["userList"]) ? $context["userList"] : null));
-            foreach ($context['_seq'] as $context["_key"] => $context["u"]) {
-                // line 18
-                echo "            <tr>
-                <td>";
-                // line 19
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "name", array()), "html", null, true);
-                echo "</td>
-                <td>";
-                // line 20
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "email", array()), "html", null, true);
-                echo "</td>
-                <td><a href='/delete/";
-                // line 21
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "ID", array()), "html", null, true);
-                echo "'>Delete user</a></td>
-            </tr>
-            ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['u'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 24
-            echo "    </table>
     ";
+        // line 9
+        if ((isset($context["sessionUser"]) ? $context["sessionUser"] : null)) {
+            // line 10
+            echo "        <p>Hello ";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["sessionUser"]) ? $context["sessionUser"] : null), "name", array()), "html", null, true);
+            echo " (";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["sessionUser"]) ? $context["sessionUser"] : null), "email", array()), "html", null, true);
+            echo ").
+            You may <a href=\"/logout\">logout</a>.</p>
+        ";
         } else {
-            // line 26
-            echo "        <p>There are no user yet</p>   
-";
+            // line 13
+            echo "        <p>You may <a href=\"/login\">login</a> or <a href=\"/register\">register</a>.</p>
+    ";
         }
-        // line 28
+        // line 15
+        echo "
+    ";
+        // line 16
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["productList"]) ? $context["productList"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
+            // line 17
+            echo "        <hr>
+        <div>
+            <h3>";
+            // line 19
+            echo twig_escape_filter($this->env, $this->getAttribute($context["product"], "name", array()), "html", null, true);
+            echo "</h3>
+            <img height=100 src=\"/images/";
+            // line 20
+            echo twig_escape_filter($this->env, $this->getAttribute($context["product"], "imagePath", array()), "html", null, true);
+            echo "\">
+            <p>";
+            // line 21
+            echo twig_escape_filter($this->env, $this->getAttribute($context["product"], "description", array()), "html", null, true);
+            echo "</p>
+            <p>Price per unit ";
+            // line 22
+            echo twig_escape_filter($this->env, $this->getAttribute($context["product"], "price", array()), "html", null, true);
+            echo "</p>
+            <form method=\"POST\" action=\"/cart\">
+                Add to cart
+                <input type=\"hidden\" name=\"productID\" value=\"";
+            // line 25
+            echo twig_escape_filter($this->env, $this->getAttribute($context["product"], "ID", array()), "html", null, true);
+            echo "\">
+                <input type=\"number\" name=\"quantity\" value=\"1\" style=\"width:30px;\">
+                <input type=\"submit\" value=\"Add to cart\">
+            </form>
+        </div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 31
         echo "
 ";
     }
@@ -99,38 +112,41 @@ class __TwigTemplate_1186c061694f516e7af4a7485c8b569594e72e19577623afcaa9a52c613
 
     public function getDebugInfo()
     {
-        return array (  86 => 28,  82 => 26,  78 => 24,  69 => 21,  65 => 20,  61 => 19,  58 => 18,  54 => 17,  46 => 11,  44 => 10,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  99 => 31,  87 => 25,  81 => 22,  77 => 21,  73 => 20,  69 => 19,  65 => 17,  61 => 16,  58 => 15,  54 => 13,  45 => 10,  43 => 9,  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
     }
 
     public function getSource()
     {
         return "{% extends \"master.html.twig\" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}e-shop{% endblock %}
 
 {% block content %}
 
-<h7>You may <a href=\"/register\">Register</a> or <a href=\"/login\">Login</a> or <a href=\"/logout\">Log out</a></h7>
+    <h1>Welcome to e-shop</h1>
 
-<br><br>
-{% if userList %}
-    <table border=\"1\">
-        <tr>
-            <th>Name</th>
-            <th>email</th>
-            <th>Operations</th>
-        </tr>
-            {% for u in userList %}
-            <tr>
-                <td>{{u.name}}</td>
-                <td>{{u.email}}</td>
-                <td><a href='/delete/{{u.ID}}'>Delete user</a></td>
-            </tr>
-            {% endfor %}
-    </table>
-    {% else %}
-        <p>There are no user yet</p>   
-{% endif %}
+    {% if sessionUser %}
+        <p>Hello {{sessionUser.name}} ({{sessionUser.email}}).
+            You may <a href=\"/logout\">logout</a>.</p>
+        {% else %}
+        <p>You may <a href=\"/login\">login</a> or <a href=\"/register\">register</a>.</p>
+    {% endif %}
+
+    {% for product in productList %}
+        <hr>
+        <div>
+            <h3>{{product.name}}</h3>
+            <img height=100 src=\"/images/{{ product.imagePath }}\">
+            <p>{{product.description}}</p>
+            <p>Price per unit {{product.price}}</p>
+            <form method=\"POST\" action=\"/cart\">
+                Add to cart
+                <input type=\"hidden\" name=\"productID\" value=\"{{product.ID}}\">
+                <input type=\"number\" name=\"quantity\" value=\"1\" style=\"width:30px;\">
+                <input type=\"submit\" value=\"Add to cart\">
+            </form>
+        </div>
+    {% endfor %}
 
 {% endblock %}
 ";
