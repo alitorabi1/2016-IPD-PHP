@@ -1,0 +1,24 @@
+HOMEWORK
+
+articleaddedit.php
+
+TODO: add 3-state form with Subject, Body (textarea)
+Require subject at least 4 characters long,
+Require body at least 50 characters long.
+Make sure you re-display subject and body if submission has failed.
+On successful submission add article to database.
+
+
+index.php
+
+TODO: Add code to fetch the latest 5 articles from database
+and display their titles, author and date of creation.
+
+
+articleview.php?id=7
+
+TODO: Add code to fetch the one article from database
+and display it in full (Title, Author name, Date of creation, body).
+
+
+

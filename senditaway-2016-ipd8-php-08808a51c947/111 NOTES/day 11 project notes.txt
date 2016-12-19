@@ -1,0 +1,50 @@
+PROJECT NOTES AND IDEAS
+
+Technologies that are required:
+* PHP Slim, Meekrodb, Twig, Monolog
+* AJAX (some use, at least 2 calls)
+
+Technologies suggested (choice of):
+* Shopping cart (prefereably with AJAX)
+* RESTful APIs created by you yourself
+* Using RESTful APIs created by someone else
+- Facebook login integration
+- Any Google APIs
+- Any financial APIs
+- PayPal APIs
+- Text messages
+- Password reset / recovery via email
+* Storing binary files in database (PDF, images, etc.)
+* Generating graphics (GD library) on the fly
+* Generating PDF/Excel/Word document on the fly (additional PHP library)
+* Multilingual support
+* RSS feeds
+
+Check http://www.programmableweb.com/apis for ideas
+
+
+= About 10 different pages in a project is okay.
+= At most 30% of project code may be in JavaScript/jQuery,
+most of the code should be PHP
+
+
+Actual project ideas:
+* Limited reimplementation of an existing service
+- eBay (bidding)
+- specialized sites (e.g. book a service)
+- Amazon
+- any eCommerce site
+- GMail (mostly graphical interface)
+- in-restaurant orders via web interface (tablets)
+
+Things NOT to do:
+- chats or any real-time services
+(if you want to - you'd need to learn about NodeJS)
+
+
+
+
+
+
+
+

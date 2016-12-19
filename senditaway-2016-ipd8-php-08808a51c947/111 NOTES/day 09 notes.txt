@@ -1,0 +1,9 @@
+Apache Port-based virtual host code to add to apache config.
+
+Listen 8001
+<VirtualHost *:8001>
+  DocumentRoot "c:/xampp/htdocs/ipd8/slimads"
+</VirtualHost>
+
+AJAX - Asynchronous JSON and XML
+

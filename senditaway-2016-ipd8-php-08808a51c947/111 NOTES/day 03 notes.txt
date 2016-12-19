@@ -1,0 +1,26 @@
+<?php
+
+// returns TRUE or FALSE
+function verifyDateString($dateString) {
+	if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateString)) {
+		return FALSE;
+	}
+	$split = explode("-", $dateString);
+	return checkdate($split[1], $split[2], $split[0]);
+}
+
+$app = new App();
+
+$app->doIt();
+
+$app->field = 87;
+
+$app::doAnother();
+App::doAnother();
+
+$app::staticField = "Abc";
+App::staticField = "Abc";
+
+
+
+

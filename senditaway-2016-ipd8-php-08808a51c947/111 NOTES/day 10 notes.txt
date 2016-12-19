@@ -1,0 +1,8 @@
+
+- GET /todoitems  << return all records from todoitems table
+- GET /todoitems/34 << return data of record 34 in todoitems
+- POST /todoitems << add new record to todoitems table and return its ID
+- PUT /todoitems/25 << update data of record 25
+- DELETE /todoitems/71 << delete record 71
+
+

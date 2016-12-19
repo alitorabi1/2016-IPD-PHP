@@ -1,0 +1,17 @@
+SELECT articles.ID as articleID, name, pubDate,title, body
+FROM articles, users
+WHERE articles.authorID = users.ID ORDER BY pubDate desc LIMIT 5"
+
+
+... LIMIT COUNT
+... LIMIT 10
+
+... LIMIT SKIP, COUNT
+... LIMIT 20, 10
+
+
+<textarea>
+this is &gt; than other is &lt;
+</textarea>
+
+

@@ -1,0 +1,28 @@
+day 5 homework
+
+1. modify index.php so that
+if user is logged in then
+next to articles authored by
+currently logged user you display link "edit".
+
+link leads to articleaddedit.php?id=11
+
+
+2. modify articleaddedit.php
+
+If user attempts to edit article they did not author
+they should be denied access to it.
+
+Make modifications to allow editing if 'id' parameter
+is supplied on the URL.
+
+Note: when form submits via POST
+you will still be able to access $_GET['id'];
+
+
+3. In articleview.php allow user to add comments via POST form
+if the user is logged in - as per provided mockup in PDF.
+
+If user is not logged in then comment text box does
+not show but instead a link "you must register or login to post comments"
+

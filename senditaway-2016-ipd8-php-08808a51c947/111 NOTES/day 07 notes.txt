@@ -1,0 +1,10 @@
+M * Meekrodb - MySQL access library
+V * Twig - templating library
+C * PHP Slim microframework
+Monolog - logging library
+
+
+Versions:
+- stable
+- release candidate, beta, alpha
+- development (daily)

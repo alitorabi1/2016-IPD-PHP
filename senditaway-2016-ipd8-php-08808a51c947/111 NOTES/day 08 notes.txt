@@ -1,0 +1,32 @@
+DNS Domain Name Server(s)
+- translation of names into IP addresses
+- reverse - IP into names
+- specification of Mail Exchangers
+- many other functions
+
+3 types of virtual hosts
+- IP-based (one machine with multiple IP addresses)
+- name-based (multiple DNS names point to 1 IP address)
+- port-based (rarely used but good for development)
+
+
+http://www.server.com:345/index.html
+
+http - port 80
+https - port 443
+
+http://localhost:8080/   c:\xampp\htdocs
+
+http://localhost:8001/   c:\xampp\htdocs\ipd8\slimads
+http://localhost:8001/index.php
+
+www.slimads.org/index.php
+
+<a href="/index.php">
+<a href="/postad">
+
+127.0.0.1 === localhost
+
+
+
+
